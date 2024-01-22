@@ -113,4 +113,4 @@ app.use('/user', userRoutes);
 app.use('/artist', artistRoutes);
 
 
-app.listen(port, () => console.log(`Server is listening on port ${port}! <3 ${process.env.DATABASE_URL}`));
+app.listen(port, () => console.log(`Server is listening on port ${port}! <3 ${process.env.DATABASE_URL} ${process.env.DIRECT_URL}`));
