@@ -74,7 +74,7 @@ app.get('/callback', (req, res) => {
                 expires_in
             });
             // Redirect to client with tokens
-            res.redirect(`http://localhost:5173/?${queryParams}`);
+            res.redirect(`https://setlist-brx.netlify.app/?${queryParams}`);
         }else{
             res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
         }
