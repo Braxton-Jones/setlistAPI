@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Users {
+ id                Int           @id @default(autoincrement())
+ name              String?
+ spotifyUserId     String?       @unique
+ createdAt         DateTime      @default(now())
+ updatedAt         DateTime      @updatedAt
+ deletedAt         DateTime?
+ isOnboarded       Boolean       @default(false)
+ playlists         Playlists[]
+}
+
+model Playlists {
+ id                Int           @id @default(autoincrement())
+ name              String
+ createdAt         DateTime      @default(now())
+ updatedAt         DateTime      @updatedAt
+ deletedAt         DateTime?
+ spotifyPlaylistId String?       @unique
+ associatedGenres  Genre[]
+ featuredArtists   Artists[]
+ purpose           String?
+ creator           Users[]
+}
+
+
+model Artists {
+ id                Int           @id @default(autoincrement())
+ name              String
+ createdAt         DateTime      @default(now())
+ updatedAt         DateTime      @updatedAt
+ deletedAt         DateTime?
+ genres            String[]
+ spotifyArtistId   String?       @unique
+ playlists         Playlists[]
+}
+
+model Genre {
+  id                Int           @id @default(autoincrement())
+  name              String        @unique
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  playlists         Playlists[]
+}
